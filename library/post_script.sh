@@ -23,6 +23,11 @@ rm io_file_struct_api.e
 rm io_marker_struct_api.e
 rm io_wide_data_struct_api.e
 rm tidy_functions_api.e
+
+mkdir linux
+cp tidy_allocator_vtbl_struct_api.e ./linux
+rm tidy_allocator_vtbl_struct_api.e
+
 cd ..
 cd ..
 

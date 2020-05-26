@@ -1,0 +1,20 @@
+package wrap_tidy
+
+project
+	wrap_tidy = "library/wrap_tidy.ecf"
+
+note
+	title: Eiffel wrap_tidy
+	description: "[
+		Eiffel binding for HTML tidy library. 
+		
+		libtidy is a C static and dynamic library that developers can integrate into their applications in order to bring all of Tidy’s power to your favorite tools. libtidy is used today in desktop applications, web servers, and more.
+				]"
+
+	tags: gsl, numerical, wrapc 
+	license: EFL
+	copyright: Copyright (c)  2020 Javier Velilla, Eiffel Software and others.
+	link[license]: "license" "https://github.com/eiffel-wrap-c/wrap_tidy/blob/master/license.lic"
+	link[github]: "project" https://github.com/eiffel-wrap-c/wrap_tidy
+
+end

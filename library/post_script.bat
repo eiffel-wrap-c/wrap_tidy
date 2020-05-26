@@ -19,6 +19,10 @@ del /f tidy_buffer_struct_api.e
 del /f iobuf_struct_api.e
 del /f tidy_functions_api.e
 
+mkdir win
+copy tidy_allocator_vtbl_struct_api.e .\win
+del /f tidy_allocator_vtbl_struct_api.e
+
 cd ..
 cd ..
 

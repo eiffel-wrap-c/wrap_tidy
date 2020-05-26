@@ -132,7 +132,7 @@ feature {NONE} -- Implementation wrapper for struct struct _TidyAllocatorVtbl
 			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				((struct _TidyAllocatorVtbl*)$an_item)->alloc =  (void *(*) (TidyAllocator *self, size_t nbytes))$a_value
+				((struct _TidyAllocatorVtbl*)$an_item)->alloc =  (void *(__fastcall *) (TidyAllocator *self, size_t nbytes))$a_value
 			]"
 		ensure
 			alloc_set: a_value = c_alloc (an_item)
@@ -156,7 +156,7 @@ feature {NONE} -- Implementation wrapper for struct struct _TidyAllocatorVtbl
 			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				((struct _TidyAllocatorVtbl*)$an_item)->realloc =  (void *(*) (TidyAllocator *self, void *block, size_t nbytes))$a_value
+				((struct _TidyAllocatorVtbl*)$an_item)->realloc =  (void *(__fastcall *) (TidyAllocator *self, void *block, size_t nbytes))$a_value
 			]"
 		ensure
 			realloc_set: a_value = c_realloc (an_item)
@@ -180,7 +180,7 @@ feature {NONE} -- Implementation wrapper for struct struct _TidyAllocatorVtbl
 			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				((struct _TidyAllocatorVtbl*)$an_item)->free =  (void (*) (TidyAllocator *self, void *block))$a_value
+				((struct _TidyAllocatorVtbl*)$an_item)->free =  (void (__fastcall *) (TidyAllocator *self, void *block))$a_value
 			]"
 		ensure
 			free_set: a_value = c_free (an_item)
@@ -204,7 +204,7 @@ feature {NONE} -- Implementation wrapper for struct struct _TidyAllocatorVtbl
 			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				((struct _TidyAllocatorVtbl*)$an_item)->panic =  (void (*) (TidyAllocator *self, ctmbstr msg))$a_value
+				((struct _TidyAllocatorVtbl*)$an_item)->panic =  (void (__fastcall *) (TidyAllocator *self, ctmbstr msg))$a_value
 			]"
 		ensure
 			panic_set: a_value = c_panic (an_item)

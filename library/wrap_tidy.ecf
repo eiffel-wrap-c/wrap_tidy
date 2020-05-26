@@ -23,11 +23,20 @@
 		</external_include>
 
 		<!-- Include headers for the C target library -->
-		<external_include location="$ECF_CONFIG_PATH/C/include">
+		<external_include location="$ECF_CONFIG_PATH\C\include">
 			<condition>
 				<platform value="windows"/>
 			</condition>		
 		</external_include>
+
+
+		<!-- Include headers for the C target library -->
+		<external_include location="/usr/local/include">
+			<condition>
+				<platform excluded_value="windows"/>
+			</condition>		
+		</external_include>
+
 	
 		
 		<!-- Manual Wrapper add this only if it's needed -->
@@ -59,17 +68,19 @@
 
 
 		<!-- External C library -->
-		<external_object location="/usr/local/lib/tidy.so">
-			<condition>
-				<platform excluded_value="windows"/>
-			</condition>
-		</external_object>
 		
 		<external_object location="$ECF_CONFIG_PATH/C/lib/tidys.lib">
 			<condition>
 				<platform value="windows"/>
 			</condition>
 		</external_object>
+
+		<external_object location="/usr/local/lib/libtidys.a">
+			<condition>
+				<platform excluded_value="windows"/>
+			</condition>
+		</external_object>
+
 
 		<!-- Dependency libraries -->	
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>

@@ -16,6 +16,9 @@ del /f tidy_message_struct_api.e
 del /f tidy_node_struct_api.e
 del /f tidy_option_struct_api.e
 del /f tidy_buffer_struct_api.e
+del /f iobuf_struct_api.e
+del /f tidy_functions_api.e
+
 cd ..
 cd ..
 

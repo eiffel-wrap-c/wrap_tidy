@@ -23,10 +23,10 @@
   <target name="init_wrap_c">
     <set name="system_dir" value="${cwd}"/>
     <set name="wrap_c.library_name" value="wrap_tidy"/>
-    <set name="wrap_c.full_header_name" value="$ECF_CONFIG_PATH${path_separator}C${path_separator}include" if="${is_windows}"/>
-    <set name="wrap_c.full_header_name" value="C:\home\tools\vcpkg\installed\x64-windows-static\include${path_separator}tidy.h" unless="${is_windows}"/>
-    
-    
+    <set name="wrap_c.full_header_name" value="${system_dir}$${path_separator}manual_wrapper${path_separator}c${path_separator}incude${path_separator}eif_tidy.h" if="${is_windows}"/>
+    <set name="wrap_c.full_header_name" value="/usr/local/include/tidy.h" unless="${is_windows}"/>
+    <set name="wrap_c.c_compile_options" value="${system_dir}${path_separator}C${path_separator}include" if="${is_windows}"/>
+    <set name="wrap_c.c_compile_options" value="/usr/local/include" unless="${is_windows}"/> 
     <set name="wrap_c.c_compile_options" value=""/>
     <set name="wrap_c.use_config_file" value="True"/>
     <set name="wrap_c.verbose" value="--verbose"/>

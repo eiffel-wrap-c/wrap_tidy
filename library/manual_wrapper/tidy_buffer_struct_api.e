@@ -25,86 +25,240 @@ feature -- Measurement
 
 feature {ANY} -- Member Access
 
-	bp: C_STRING
+	allocator: detachable TIDY_ALLOCATOR_STRUCT_API
+			-- Access member `allocator`
+		require
+			exists: exists
 		do
-			create Result.make_by_pointer_and_count (c_bp (item), size.to_integer_32)
+			if attached c_allocator (item) as l_ptr and then not l_ptr.is_default_pointer then
+				create Result.make_by_pointer (l_ptr)
+			end
+		ensure
+			result_void: Result = Void implies c_allocator (item) = default_pointer
+			result_not_void: attached Result as l_result implies l_result.item = c_allocator (item)
 		end
 
-	size: NATURAL_32
+	set_allocator (a_value: TIDY_ALLOCATOR_STRUCT_API)
+			-- Set member `allocator`
+		require
+			a_value_not_void: a_value /= Void
+			exists: exists
+		do
+			set_c_allocator (item, a_value.item)
+		ensure
+			allocator_set: attached allocator as l_value implies l_value.item = a_value.item
+		end
+
+	bp: C_STRING
+			-- Access member `bp`
+		require
+			exists: exists
+		do
+			if attached c_bp (item) as l_ptr then
+				create Result.make_by_pointer (l_ptr)
+			else
+				create Result.make_empty (size)
+			end
+		ensure
+			result_void: Result.count = 0 implies c_bp (item) = default_pointer
+			result_not_void: attached Result as l_result implies l_result.string.same_string ((create {C_STRING}.make_by_pointer (item)).string)
+		end
+
+	set_bp (a_value: C_STRING)
+			-- Change the value of member `bp` to `a_value`.
+		require
+			exists: exists
+		do
+			set_c_bp (item, a_value.item )
+		end
+
+	size: INTEGER
+			-- Access member `size`
+		require
+			exists: exists
 		do
 			Result := c_size (item)
+		ensure
+			result_correct: Result = c_size (item)
 		end
 
-	allocated: NATURAL_32
+	set_size (a_value: INTEGER)
+			-- Change the value of member `size` to `a_value`.
+		require
+			exists: exists
+		do
+			set_c_size (item, a_value)
+		ensure
+			size_set: a_value = size
+		end
+
+	allocated: INTEGER
+			-- Access member `allocated`
+		require
+			exists: exists
 		do
 			Result := c_allocated (item)
+		ensure
+			result_correct: Result = c_allocated (item)
 		end
 
+	set_allocated (a_value: INTEGER)
+			-- Change the value of member `allocated` to `a_value`.
+		require
+			exists: exists
+		do
+			set_c_allocated (item, a_value)
+		ensure
+			allocated_set: a_value = allocated
+		end
+
+	next: INTEGER
+			-- Access member `next`
+		require
+			exists: exists
+		do
+			Result := c_next (item)
+		ensure
+			result_correct: Result = c_next (item)
+		end
+
+	set_next (a_value: INTEGER)
+			-- Change the value of member `next` to `a_value`.
+		require
+			exists: exists
+		do
+			set_c_next (item, a_value)
+		ensure
+			next_set: a_value = next
+		end
 
 feature {NONE} -- Implementation wrapper for struct struct _TidyBuffer
 
 	sizeof_external: INTEGER
 		external
-			"C inline use <tidybuffio.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"sizeof(struct _TidyBuffer)"
 		end
-
-feature {NONE} -- C externals
 
 	c_allocator (an_item: POINTER): POINTER
 		require
 			an_item_not_null: an_item /= default_pointer
 		external
-			"C inline use <tidy.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"[
 				((struct _TidyBuffer*)$an_item)->allocator
 			]"
 		end
 
+	set_c_allocator (an_item: POINTER; a_value: POINTER)
+		require
+			an_item_not_null: an_item /= default_pointer
+		external
+			"C inline use <eif_tidy.h>"
+		alias
+			"[
+				((struct _TidyBuffer*)$an_item)->allocator =  (TidyAllocator*)$a_value
+			]"
+		ensure
+			allocator_set: a_value = c_allocator (an_item)
+		end
+
 	c_bp (an_item: POINTER): POINTER
 		require
 			an_item_not_null: an_item /= default_pointer
 		external
-			"C inline use <tidy.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"[
 				((struct _TidyBuffer*)$an_item)->bp
 			]"
 		end
 
-	c_size (an_item: POINTER): NATURAL_32
+	set_c_bp (an_item: POINTER; a_value: POINTER)
 		require
 			an_item_not_null: an_item /= default_pointer
 		external
-			"C inline use <tidy.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				(EIF_NATURAL_32)((struct _TidyBuffer*)$an_item)->size
+				((struct _TidyBuffer*)$an_item)->bp =  (byte*)$a_value
+			]"
+		ensure
+			bp_set: a_value = c_bp (an_item)
+		end
+
+	c_size (an_item: POINTER): INTEGER
+		require
+			an_item_not_null: an_item /= default_pointer
+		external
+			"C inline use <eif_tidy.h>"
+		alias
+			"[
+				((struct _TidyBuffer*)$an_item)->size
 			]"
 		end
 
-	c_allocated (an_item: POINTER): NATURAL_32
+	set_c_size (an_item: POINTER; a_value: INTEGER)
 		require
 			an_item_not_null: an_item /= default_pointer
 		external
-			"C inline use <tidy.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				(EIF_NATURAL_32)((struct _TidyBuffer*)$an_item)->allocated
+				((struct _TidyBuffer*)$an_item)->size =  (uint)$a_value
+			]"
+		ensure
+			size_set: a_value = c_size (an_item)
+		end
+
+	c_allocated (an_item: POINTER): INTEGER
+		require
+			an_item_not_null: an_item /= default_pointer
+		external
+			"C inline use <eif_tidy.h>"
+		alias
+			"[
+				((struct _TidyBuffer*)$an_item)->allocated
 			]"
 		end
 
-	c_next (an_item: POINTER): NATURAL_32
+	set_c_allocated (an_item: POINTER; a_value: INTEGER)
 		require
 			an_item_not_null: an_item /= default_pointer
 		external
-			"C inline use <tidy.h>"
+			"C inline use <eif_tidy.h>"
 		alias
 			"[
-				(EIF_NATURAL_32)((struct _TidyBuffer*)$an_item)->next
+				((struct _TidyBuffer*)$an_item)->allocated =  (uint)$a_value
 			]"
+		ensure
+			allocated_set: a_value = c_allocated (an_item)
+		end
+
+	c_next (an_item: POINTER): INTEGER
+		require
+			an_item_not_null: an_item /= default_pointer
+		external
+			"C inline use <eif_tidy.h>"
+		alias
+			"[
+				((struct _TidyBuffer*)$an_item)->next
+			]"
+		end
+
+	set_c_next (an_item: POINTER; a_value: INTEGER)
+		require
+			an_item_not_null: an_item /= default_pointer
+		external
+			"C inline use <eif_tidy.h>"
+		alias
+			"[
+				((struct _TidyBuffer*)$an_item)->next =  (uint)$a_value
+			]"
+		ensure
+			next_set: a_value = c_next (an_item)
 		end
 
 end

@@ -15,6 +15,12 @@ libtidy is a C static and dynamic library that developers can integrate into hei
 
 ### Linux
 
+Using vcpkg (https://github.com/microsoft/vcpkg) tool, you can install libtidy library
+
+	vcpkg install tidy-html5
+
+Copy headers to `/usr/local/include` and the library to
+`/usr/local/lib`
 
 	
 ### Windows

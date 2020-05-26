@@ -9,35 +9,35 @@ class TIDY_FUNCTIONS_API
 
 feature -- Access
 
-	tidy_set_malloc_call (fmalloc: POINTER): INTEGER 
+	tidy_set_malloc_call (fmalloc: POINTER): INTEGER
 		do
 			Result := c_tidy_set_malloc_call (fmalloc)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_realloc_call (frealloc: POINTER): INTEGER 
+	tidy_set_realloc_call (frealloc: POINTER): INTEGER
 		do
 			Result := c_tidy_set_realloc_call (frealloc)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_free_call (ffree: POINTER): INTEGER 
+	tidy_set_free_call (ffree: POINTER): INTEGER
 		do
 			Result := c_tidy_set_free_call (ffree)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_panic_call (fpanic: POINTER): INTEGER 
+	tidy_set_panic_call (fpanic: POINTER): INTEGER
 		do
 			Result := c_tidy_set_panic_call (fpanic)
 		ensure
 			instance_free: class
 		end
 
-	tidy_create: detachable TIDY_DOC_STRUCT_API 
+	tidy_create: detachable TIDY_DOC_STRUCT_API
 		do
 			if attached c_tidy_create as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -47,7 +47,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_create_with_allocator (allocator: TIDY_ALLOCATOR_STRUCT_API): detachable TIDY_DOC_STRUCT_API 
+	tidy_create_with_allocator (allocator: TIDY_ALLOCATOR_STRUCT_API): detachable TIDY_DOC_STRUCT_API
 		do
 			if attached c_tidy_create_with_allocator (allocator.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -57,21 +57,21 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_release (tdoc: TIDY_DOC_STRUCT_API) 
+	tidy_release (tdoc: TIDY_DOC_STRUCT_API)
 		do
 			c_tidy_release (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_app_data (tdoc: TIDY_DOC_STRUCT_API; appdata: POINTER) 
+	tidy_set_app_data (tdoc: TIDY_DOC_STRUCT_API; appdata: POINTER)
 		do
 			c_tidy_set_app_data (tdoc.item, appdata)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_app_data (tdoc: TIDY_DOC_STRUCT_API): POINTER 
+	tidy_get_app_data (tdoc: TIDY_DOC_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_app_data (tdoc.item)
 		ensure
@@ -105,154 +105,154 @@ feature -- Access
 			]"
 		end
 
-	tidy_status (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_status (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_status (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_detected_html_version (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_detected_html_version (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_detected_html_version (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_detected_xhtml (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_detected_xhtml (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_detected_xhtml (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_detected_generic_xml (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_detected_generic_xml (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_detected_generic_xml (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_error_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_error_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_error_count (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_warning_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_warning_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_warning_count (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_access_warning_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_access_warning_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_access_warning_count (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_config_error_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_config_error_count (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_config_error_count (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_error_summary (tdoc: TIDY_DOC_STRUCT_API) 
+	tidy_error_summary (tdoc: TIDY_DOC_STRUCT_API)
 		do
 			c_tidy_error_summary (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_general_info (tdoc: TIDY_DOC_STRUCT_API) 
+	tidy_general_info (tdoc: TIDY_DOC_STRUCT_API)
 		do
 			c_tidy_general_info (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_load_config (tdoc: TIDY_DOC_STRUCT_API; configfile: C_STRING): INTEGER 
+	tidy_load_config (tdoc: TIDY_DOC_STRUCT_API; configfile: C_STRING): INTEGER
 		do
 			Result := c_tidy_load_config (tdoc.item, configfile.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_load_config_enc (tdoc: TIDY_DOC_STRUCT_API; configfile: C_STRING; charenc: C_STRING): INTEGER 
+	tidy_load_config_enc (tdoc: TIDY_DOC_STRUCT_API; configfile: C_STRING; charenc: C_STRING): INTEGER
 		do
 			Result := c_tidy_load_config_enc (tdoc.item, configfile.item, charenc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_file_exists (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER 
+	tidy_file_exists (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER
 		do
 			Result := c_tidy_file_exists (tdoc.item, filename.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER 
+	tidy_set_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER
 		do
 			Result := c_tidy_set_char_encoding (tdoc.item, encnam.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_in_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER 
+	tidy_set_in_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER
 		do
 			Result := c_tidy_set_in_char_encoding (tdoc.item, encnam.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_out_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER 
+	tidy_set_out_char_encoding (tdoc: TIDY_DOC_STRUCT_API; encnam: C_STRING): INTEGER
 		do
 			Result := c_tidy_set_out_char_encoding (tdoc.item, encnam.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_option_callback (tdoc: TIDY_DOC_STRUCT_API; poptcallback: POINTER): INTEGER 
+	tidy_set_option_callback (tdoc: TIDY_DOC_STRUCT_API; poptcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_option_callback (tdoc.item, poptcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_config_callback (tdoc: TIDY_DOC_STRUCT_API; pconfigcallback: POINTER): INTEGER 
+	tidy_set_config_callback (tdoc: TIDY_DOC_STRUCT_API; pconfigcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_config_callback (tdoc.item, pconfigcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_config_change_callback (tdoc: TIDY_DOC_STRUCT_API; pcallback: POINTER): INTEGER 
+	tidy_set_config_change_callback (tdoc: TIDY_DOC_STRUCT_API; pcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_config_change_callback (tdoc.item, pcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_id (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_get_id (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_get_id (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_id_for_name (optnam: C_STRING): INTEGER 
+	tidy_opt_get_id_for_name (optnam: C_STRING): INTEGER
 		do
 			Result := c_tidy_opt_get_id_for_name (optnam.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_option_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_get_option_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_get_option_list (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -262,7 +262,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_next_option (tdoc: TIDY_DOC_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): detachable TIDY_OPTION_STRUCT_API 
+	tidy_get_next_option (tdoc: TIDY_DOC_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): detachable TIDY_OPTION_STRUCT_API
 		do
 			if attached c_tidy_get_next_option (tdoc.item, pos.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -272,7 +272,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_option (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): detachable TIDY_OPTION_STRUCT_API 
+	tidy_get_option (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): detachable TIDY_OPTION_STRUCT_API
 		do
 			if attached c_tidy_get_option (tdoc.item, optid) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -282,7 +282,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_option_by_name (tdoc: TIDY_DOC_STRUCT_API; optnam: C_STRING): detachable TIDY_OPTION_STRUCT_API 
+	tidy_get_option_by_name (tdoc: TIDY_DOC_STRUCT_API; optnam: C_STRING): detachable TIDY_OPTION_STRUCT_API
 		do
 			if attached c_tidy_get_option_by_name (tdoc.item, optnam.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -292,63 +292,63 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_name (opt: TIDY_OPTION_STRUCT_API): POINTER 
+	tidy_opt_get_name (opt: TIDY_OPTION_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_name (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_type (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_get_type (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_get_type (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_option_is_list (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_option_is_list (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_option_is_list (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_is_read_only (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_is_read_only (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_is_read_only (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_category (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_get_category (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_get_category (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_default (opt: TIDY_OPTION_STRUCT_API): POINTER 
+	tidy_opt_get_default (opt: TIDY_OPTION_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_default (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_default_int (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_get_default_int (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_get_default_int (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_default_bool (opt: TIDY_OPTION_STRUCT_API): INTEGER 
+	tidy_opt_get_default_bool (opt: TIDY_OPTION_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_get_default_bool (opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_pick_list (opt: TIDY_OPTION_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_opt_get_pick_list (opt: TIDY_OPTION_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_opt_get_pick_list (opt.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -358,126 +358,126 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_next_pick (opt: TIDY_OPTION_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): POINTER 
+	tidy_opt_get_next_pick (opt: TIDY_OPTION_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_next_pick (opt.item, pos.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_value (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER 
+	tidy_opt_get_value (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER
 		do
 			Result := c_tidy_opt_get_value (tdoc.item, optid)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_set_value (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: C_STRING): INTEGER 
+	tidy_opt_set_value (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: C_STRING): INTEGER
 		do
 			Result := c_tidy_opt_set_value (tdoc.item, optid, val.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_parse_value (tdoc: TIDY_DOC_STRUCT_API; optnam: C_STRING; val: C_STRING): INTEGER 
+	tidy_opt_parse_value (tdoc: TIDY_DOC_STRUCT_API; optnam: C_STRING; val: C_STRING): INTEGER
 		do
 			Result := c_tidy_opt_parse_value (tdoc.item, optnam.item, val.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_int (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): INTEGER 
+	tidy_opt_get_int (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): INTEGER
 		do
 			Result := c_tidy_opt_get_int (tdoc.item, optid)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_set_int (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: INTEGER): INTEGER 
+	tidy_opt_set_int (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: INTEGER): INTEGER
 		do
 			Result := c_tidy_opt_set_int (tdoc.item, optid, val)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_bool (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): INTEGER 
+	tidy_opt_get_bool (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): INTEGER
 		do
 			Result := c_tidy_opt_get_bool (tdoc.item, optid)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_set_bool (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: INTEGER): INTEGER 
+	tidy_opt_set_bool (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; val: INTEGER): INTEGER
 		do
 			Result := c_tidy_opt_set_bool (tdoc.item, optid, val)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_reset_to_default (tdoc: TIDY_DOC_STRUCT_API; opt: INTEGER): INTEGER 
+	tidy_opt_reset_to_default (tdoc: TIDY_DOC_STRUCT_API; opt: INTEGER): INTEGER
 		do
 			Result := c_tidy_opt_reset_to_default (tdoc.item, opt)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_reset_all_to_default (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_reset_all_to_default (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_reset_all_to_default (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_snapshot (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_reset_to_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_reset_to_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_reset_to_snapshot (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_diff_than_default (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_diff_than_default (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_diff_than_default (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_diff_than_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_diff_than_snapshot (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_diff_than_snapshot (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_copy_config (tdocto: TIDY_DOC_STRUCT_API; tdocfrom: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_opt_copy_config (tdocto: TIDY_DOC_STRUCT_API; tdocfrom: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_copy_config (tdocto.item, tdocfrom.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_enc_name (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER 
+	tidy_opt_get_enc_name (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER
 		do
 			Result := c_tidy_opt_get_enc_name (tdoc.item, optid)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_curr_pick (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER 
+	tidy_opt_get_curr_pick (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER): POINTER
 		do
 			Result := c_tidy_opt_get_curr_pick (tdoc.item, optid)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_decl_tag_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_opt_get_decl_tag_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_opt_get_decl_tag_list (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -487,14 +487,14 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_next_decl_tag (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; iter: TIDY_ITERATOR_STRUCT_API): POINTER 
+	tidy_opt_get_next_decl_tag (tdoc: TIDY_DOC_STRUCT_API; optid: INTEGER; iter: TIDY_ITERATOR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_next_decl_tag (tdoc.item, optid, iter.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_priority_attr_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_opt_get_priority_attr_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_opt_get_priority_attr_list (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -504,14 +504,14 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_next_priority_attr (tdoc: TIDY_DOC_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): POINTER 
+	tidy_opt_get_next_priority_attr (tdoc: TIDY_DOC_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_next_priority_attr (tdoc.item, iter.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_muted_message_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_opt_get_muted_message_list (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_opt_get_muted_message_list (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -521,21 +521,21 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_next_muted_message (tdoc: TIDY_DOC_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): POINTER 
+	tidy_opt_get_next_muted_message (tdoc: TIDY_DOC_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_next_muted_message (tdoc.item, iter.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_doc (tdoc: TIDY_DOC_STRUCT_API; opt: TIDY_OPTION_STRUCT_API): POINTER 
+	tidy_opt_get_doc (tdoc: TIDY_DOC_STRUCT_API; opt: TIDY_OPTION_STRUCT_API): POINTER
 		do
 			Result := c_tidy_opt_get_doc (tdoc.item, opt.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_get_doc_links_list (tdoc: TIDY_DOC_STRUCT_API; opt: TIDY_OPTION_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_opt_get_doc_links_list (tdoc: TIDY_DOC_STRUCT_API; opt: TIDY_OPTION_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_opt_get_doc_links_list (tdoc.item, opt.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -545,7 +545,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_opt_get_next_doc_links (tdoc: TIDY_DOC_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): detachable TIDY_OPTION_STRUCT_API 
+	tidy_opt_get_next_doc_links (tdoc: TIDY_DOC_STRUCT_API; pos: TIDY_ITERATOR_STRUCT_API): detachable TIDY_OPTION_STRUCT_API
 		do
 			if attached c_tidy_opt_get_next_doc_links (tdoc.item, pos.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -555,108 +555,107 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_init_source (source: TIDY_INPUT_SOURCE_STRUCT_API; srcdata: POINTER; gbfunc: POINTER; ugbfunc: POINTER; endfunc: POINTER): INTEGER 
+	tidy_init_source (source: TIDY_INPUT_SOURCE_STRUCT_API; srcdata: POINTER; gbfunc: POINTER; ugbfunc: POINTER; endfunc: POINTER): INTEGER
 		do
 			Result := c_tidy_init_source (source.item, srcdata, gbfunc, ugbfunc, endfunc)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_byte (source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER 
+	tidy_get_byte (source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_byte (source.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_unget_byte (source: TIDY_INPUT_SOURCE_STRUCT_API; bytevalue: INTEGER) 
+	tidy_unget_byte (source: TIDY_INPUT_SOURCE_STRUCT_API; bytevalue: INTEGER)
 		do
 			c_tidy_unget_byte (source.item, bytevalue)
 		ensure
 			instance_free: class
 		end
 
-	tidy_is_eof (source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER 
+	tidy_is_eof (source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_is_eof (source.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_init_sink (sink: TIDY_OUTPUT_SINK_STRUCT_API; snkdata: POINTER; pbfunc: POINTER): INTEGER 
+	tidy_init_sink (sink: TIDY_OUTPUT_SINK_STRUCT_API; snkdata: POINTER; pbfunc: POINTER): INTEGER
 		do
 			Result := c_tidy_init_sink (sink.item, snkdata, pbfunc)
 		ensure
 			instance_free: class
 		end
 
-	tidy_put_byte (sink: TIDY_OUTPUT_SINK_STRUCT_API; bytevalue: INTEGER) 
+	tidy_put_byte (sink: TIDY_OUTPUT_SINK_STRUCT_API; bytevalue: INTEGER)
 		do
 			c_tidy_put_byte (sink.item, bytevalue)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_emacs_file (tdoc: TIDY_DOC_STRUCT_API; filepath: C_STRING) 
+	tidy_set_emacs_file (tdoc: TIDY_DOC_STRUCT_API; filepath: C_STRING)
 		do
 			c_tidy_set_emacs_file (tdoc.item, filepath.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_emacs_file (tdoc: TIDY_DOC_STRUCT_API): POINTER 
+	tidy_get_emacs_file (tdoc: TIDY_DOC_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_emacs_file (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_error_file (tdoc: TIDY_DOC_STRUCT_API; errfilnam: C_STRING): detachable IOBUF_STRUCT_API 
+	tidy_set_error_file (tdoc: TIDY_DOC_STRUCT_API; errfilnam: C_STRING): POINTER
 		do
 			if attached c_tidy_set_error_file (tdoc.item, errfilnam.item) as l_ptr and then not l_ptr.is_default_pointer then
-				create Result.make_by_pointer ( l_ptr )
+				Result := l_ptr
 			end
-
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_error_buffer (tdoc: TIDY_DOC_STRUCT_API; errbuf: TIDY_BUFFER_STRUCT_API): INTEGER 
+	tidy_set_error_buffer (tdoc: TIDY_DOC_STRUCT_API; errbuf: TIDY_BUFFER_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_set_error_buffer (tdoc.item, errbuf.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_error_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER 
+	tidy_set_error_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_set_error_sink (tdoc.item, sink.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_report_filter (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER 
+	tidy_set_report_filter (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_report_filter (tdoc.item, filtcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_report_callback (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER 
+	tidy_set_report_callback (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_report_callback (tdoc.item, filtcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_message_callback (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER 
+	tidy_set_message_callback (tdoc: TIDY_DOC_STRUCT_API; filtcallback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_message_callback (tdoc.item, filtcallback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_doc (tmessage: TIDY_MESSAGE_STRUCT_API): detachable TIDY_DOC_STRUCT_API 
+	tidy_get_message_doc (tmessage: TIDY_MESSAGE_STRUCT_API): detachable TIDY_DOC_STRUCT_API
 		do
 			if attached c_tidy_get_message_doc (tmessage.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -666,119 +665,119 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_message_code (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER 
+	tidy_get_message_code (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_message_code (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_key (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_key (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_key (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_line (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER 
+	tidy_get_message_line (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_message_line (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_column (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER 
+	tidy_get_message_column (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_message_column (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_level (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER 
+	tidy_get_message_level (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_message_level (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_is_muted (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER 
+	tidy_get_message_is_muted (tmessage: TIDY_MESSAGE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_message_is_muted (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_format_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_format_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_format_default (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_format (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_format (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_format (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_default (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_pos_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_pos_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_pos_default (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_pos (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_pos (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_pos (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_prefix_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_prefix_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_prefix_default (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_prefix (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_prefix (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_prefix (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_output_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_output_default (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_output_default (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_output (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER 
+	tidy_get_message_output (tmessage: TIDY_MESSAGE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_message_output (tmessage.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_message_arguments (tmessage: TIDY_MESSAGE_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API 
+	tidy_get_message_arguments (tmessage: TIDY_MESSAGE_STRUCT_API): detachable TIDY_ITERATOR_STRUCT_API
 		do
 			if attached c_tidy_get_message_arguments (tmessage.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -788,7 +787,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_next_message_argument (tmessage: TIDY_MESSAGE_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): detachable TIDY_MESSAGE_ARGUMENT_STRUCT_API 
+	tidy_get_next_message_argument (tmessage: TIDY_MESSAGE_STRUCT_API; iter: TIDY_ITERATOR_STRUCT_API): detachable TIDY_MESSAGE_ARGUMENT_STRUCT_API
 		do
 			if attached c_tidy_get_next_message_argument (tmessage.item, iter.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -798,161 +797,161 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_arg_type (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER 
+	tidy_get_arg_type (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_arg_type (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_arg_format (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): POINTER 
+	tidy_get_arg_format (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_arg_format (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_arg_value_string (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): POINTER 
+	tidy_get_arg_value_string (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): POINTER
 		do
 			Result := c_tidy_get_arg_value_string (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_arg_value_uint (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER 
+	tidy_get_arg_value_uint (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_arg_value_uint (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_arg_value_int (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER 
+	tidy_get_arg_value_int (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_get_arg_value_int (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_arg_value_double (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): REAL_64 
+	tidy_get_arg_value_double (tmessage: TIDY_MESSAGE_STRUCT_API; arg: TIDY_MESSAGE_ARGUMENT_STRUCT_API): REAL_64
 		do
 			Result := c_tidy_get_arg_value_double (tmessage.item, arg.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_pretty_printer_callback (tdoc: TIDY_DOC_STRUCT_API; callback: POINTER): INTEGER 
+	tidy_set_pretty_printer_callback (tdoc: TIDY_DOC_STRUCT_API; callback: POINTER): INTEGER
 		do
 			Result := c_tidy_set_pretty_printer_callback (tdoc.item, callback)
 		ensure
 			instance_free: class
 		end
 
-	tidy_parse_file (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER 
+	tidy_parse_file (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER
 		do
 			Result := c_tidy_parse_file (tdoc.item, filename.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_parse_stdin (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_parse_stdin (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_parse_stdin (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_parse_string (tdoc: TIDY_DOC_STRUCT_API; content: C_STRING): INTEGER 
+	tidy_parse_string (tdoc: TIDY_DOC_STRUCT_API; content: C_STRING): INTEGER
 		do
 			Result := c_tidy_parse_string (tdoc.item, content.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_parse_buffer (tdoc: TIDY_DOC_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER 
+	tidy_parse_buffer (tdoc: TIDY_DOC_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_parse_buffer (tdoc.item, buf.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_parse_source (tdoc: TIDY_DOC_STRUCT_API; source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER 
+	tidy_parse_source (tdoc: TIDY_DOC_STRUCT_API; source: TIDY_INPUT_SOURCE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_parse_source (tdoc.item, source.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_clean_and_repair (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_clean_and_repair (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_clean_and_repair (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_run_diagnostics (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_run_diagnostics (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_run_diagnostics (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_report_doctype (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_report_doctype (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_report_doctype (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_save_file (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER 
+	tidy_save_file (tdoc: TIDY_DOC_STRUCT_API; filename: C_STRING): INTEGER
 		do
 			Result := c_tidy_save_file (tdoc.item, filename.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_save_stdout (tdoc: TIDY_DOC_STRUCT_API): INTEGER 
+	tidy_save_stdout (tdoc: TIDY_DOC_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_save_stdout (tdoc.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_save_buffer (tdoc: TIDY_DOC_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER 
+	tidy_save_buffer (tdoc: TIDY_DOC_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_save_buffer (tdoc.item, buf.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_save_string (tdoc: TIDY_DOC_STRUCT_API; buffer: C_STRING; buflen: POINTER): INTEGER 
+	tidy_save_string (tdoc: TIDY_DOC_STRUCT_API; buffer: C_STRING; buflen: POINTER): INTEGER
 		do
 			Result := c_tidy_save_string (tdoc.item, buffer.item, buflen)
 		ensure
 			instance_free: class
 		end
 
-	tidy_save_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER 
+	tidy_save_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_save_sink (tdoc.item, sink.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_save_file (tdoc: TIDY_DOC_STRUCT_API; cfgfil: C_STRING): INTEGER 
+	tidy_opt_save_file (tdoc: TIDY_DOC_STRUCT_API; cfgfil: C_STRING): INTEGER
 		do
 			Result := c_tidy_opt_save_file (tdoc.item, cfgfil.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_opt_save_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER 
+	tidy_opt_save_sink (tdoc: TIDY_DOC_STRUCT_API; sink: TIDY_OUTPUT_SINK_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_opt_save_sink (tdoc.item, sink.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_get_root (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_root (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_root (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -962,7 +961,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_html (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_html (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_html (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -972,7 +971,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_head (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_head (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_head (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -982,7 +981,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_body (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_body (tdoc: TIDY_DOC_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_body (tdoc.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -992,7 +991,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_parent (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_parent (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_parent (tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1002,7 +1001,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_child (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_child (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_child (tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1012,7 +1011,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_next (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_next (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_next (tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1022,7 +1021,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_get_prev (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_get_prev (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_get_prev (tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1032,7 +1031,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_discard_element (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API 
+	tidy_discard_element (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): detachable TIDY_NODE_STRUCT_API
 		do
 			if attached c_tidy_discard_element (tdoc.item, tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1042,7 +1041,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_attr_first (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_ATTR_STRUCT_API 
+	tidy_attr_first (tnod: TIDY_NODE_STRUCT_API): detachable TIDY_ATTR_STRUCT_API
 		do
 			if attached c_tidy_attr_first (tnod.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1052,7 +1051,7 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_attr_next (tattr: TIDY_ATTR_STRUCT_API): detachable TIDY_ATTR_STRUCT_API 
+	tidy_attr_next (tattr: TIDY_ATTR_STRUCT_API): detachable TIDY_ATTR_STRUCT_API
 		do
 			if attached c_tidy_attr_next (tattr.item) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1062,42 +1061,42 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_attr_name (tattr: TIDY_ATTR_STRUCT_API): POINTER 
+	tidy_attr_name (tattr: TIDY_ATTR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_attr_name (tattr.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_attr_value (tattr: TIDY_ATTR_STRUCT_API): POINTER 
+	tidy_attr_value (tattr: TIDY_ATTR_STRUCT_API): POINTER
 		do
 			Result := c_tidy_attr_value (tattr.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_attr_discard (itdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; tattr: TIDY_ATTR_STRUCT_API) 
+	tidy_attr_discard (itdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; tattr: TIDY_ATTR_STRUCT_API)
 		do
 			c_tidy_attr_discard (itdoc.item, tnod.item, tattr.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_attr_get_id (tattr: TIDY_ATTR_STRUCT_API): INTEGER 
+	tidy_attr_get_id (tattr: TIDY_ATTR_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_attr_get_id (tattr.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_attr_is_event (tattr: TIDY_ATTR_STRUCT_API): INTEGER 
+	tidy_attr_is_event (tattr: TIDY_ATTR_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_attr_is_event (tattr.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_attr_get_by_id (tnod: TIDY_NODE_STRUCT_API; attid: INTEGER): detachable TIDY_ATTR_STRUCT_API 
+	tidy_attr_get_by_id (tnod: TIDY_NODE_STRUCT_API; attid: INTEGER): detachable TIDY_ATTR_STRUCT_API
 		do
 			if attached c_tidy_attr_get_by_id (tnod.item, attid) as l_ptr and then not l_ptr.is_default_pointer then
 				create Result.make_by_pointer ( l_ptr )
@@ -1107,77 +1106,77 @@ feature -- Access
 			instance_free: class
 		end
 
-	tidy_node_get_type (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_get_type (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_get_type (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_get_name (tnod: TIDY_NODE_STRUCT_API): POINTER 
+	tidy_node_get_name (tnod: TIDY_NODE_STRUCT_API): POINTER
 		do
 			Result := c_tidy_node_get_name (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_is_text (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_is_text (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_is_text (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_is_prop (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_is_prop (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_is_prop (tdoc.item, tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_is_header (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_is_header (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_is_header (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_has_text (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_has_text (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_has_text (tdoc.item, tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_get_text (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER 
+	tidy_node_get_text (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_get_text (tdoc.item, tnod.item, buf.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_get_value (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER 
+	tidy_node_get_value (tdoc: TIDY_DOC_STRUCT_API; tnod: TIDY_NODE_STRUCT_API; buf: TIDY_BUFFER_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_get_value (tdoc.item, tnod.item, buf.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_get_id (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_get_id (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_get_id (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_line (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_line (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_line (tnod.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_node_column (tnod: TIDY_NODE_STRUCT_API): INTEGER 
+	tidy_node_column (tnod: TIDY_NODE_STRUCT_API): INTEGER
 		do
 			Result := c_tidy_node_column (tnod.item)
 		ensure
@@ -1193,14 +1192,14 @@ feature -- Access
 			]"
 		end
 
-	tidy_error_code_from_key (code: C_STRING): INTEGER 
+	tidy_error_code_from_key (code: C_STRING): INTEGER
 		do
 			Result := c_tidy_error_code_from_key (code.item)
 		ensure
 			instance_free: class
 		end
 
-	tidy_set_language (languagecode: C_STRING): INTEGER 
+	tidy_set_language (languagecode: C_STRING): INTEGER
 		do
 			Result := c_tidy_set_language (languagecode.item)
 		ensure

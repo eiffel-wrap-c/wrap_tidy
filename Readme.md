@@ -40,7 +40,8 @@ Work in progress.
 
 ## Examples
 
-* [Example 1](./examples/01_example) 		`Shows how to use tidy library`
+* [Example 1](./examples/01_example) 		`Shows how to parser using tidy`
+* [Example 2](./examples/02_example) 		`Shows how to use tidy library`
 
 
 ### How to compile the C library glue code.
